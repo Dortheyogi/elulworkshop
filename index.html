@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
@@ -22,24 +23,110 @@
             --gradient-light: linear-gradient(180deg, var(--light) 0%, var(--cream) 100%);
         }
 
-        body { font-family: 'Heebo', sans-serif; background: var(--light); color: var(--dark); line-height: 1.8; overflow-x: hidden; direction: rtl; font-weight: 300; }
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.8;
+            overflow-x: hidden;
+            direction: rtl;
+            font-weight: 300;
+        }
 
         /* Hero Section */
-        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; background: var(--gradient-light); overflow: hidden; }
-        .hero::before { content: ''; position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, var(--accent) 0%, transparent 70%); opacity: 0.1; top: -250px; right: -250px; animation: float 20s ease-in-out infinite; }
-        .hero::after { content: ''; position: absolute; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, var(--primary-light) 0%, transparent 70%); opacity: 0.08; bottom: -200px; left: -200px; animation: float 25s ease-in-out infinite reverse; }
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: var(--gradient-light);
+            overflow: hidden;
+        }
 
-        @keyframes float { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(30px, -30px) scale(1.1); } }
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px; height: 500px; border-radius: 50%;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+            opacity: 0.1; top: -250px; right: -250px;
+            animation: float 20s ease-in-out infinite;
+        }
 
-        .hero-content { text-align: center; z-index: 2; max-width: 900px; padding: 0 20px; animation: fadeInUp 1.5s ease; }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        .hero h1 { font-family: 'Rubik', sans-serif; font-size: clamp(3rem, 7vw, 6rem); font-weight: 300; color: var(--primary); margin-bottom: 1rem; letter-spacing: 0.05em; position: relative; }
-        .hero-subtitle { font-size: 1.3rem; color: var(--muted); font-weight: 300; margin-bottom: 3rem; letter-spacing: 0.02em; }
-        .hero-date { display: inline-flex; align-items: center; gap: 2rem; padding: 1.5rem 3rem; background: white; border-radius: 100px; box-shadow: 0 10px 40px var(--shadow); margin-bottom: 3rem; font-size: 1.1rem; color: var(--dark); }
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 400px; height: 400px; border-radius: 50%;
+            background: radial-gradient(circle, var(--primary-light) 0%, transparent 70%);
+            opacity: 0.08; bottom: -200px; left: -200px;
+            animation: float 25s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -30px) scale(1.1); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 900px;
+            padding: 0 20px;
+            animation: fadeInUp 1.5s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-family: 'Rubik', sans-serif;
+            font-size: clamp(3rem, 7vw, 6rem);
+            font-weight: 300;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+            position: relative;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--muted);
+            font-weight: 300;
+            margin-bottom: 3rem;
+            letter-spacing: 0.02em;
+        }
+
+        .hero-date {
+            display: inline-flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 1.5rem 3rem;
+            background: white;
+            border-radius: 100px;
+            box-shadow: 0 10px 40px var(--shadow);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+            color: var(--dark);
+        }
+
         .hero-date span { display: flex; align-items: center; gap: 0.5rem; }
 
         /* CTA Button */
-        .cta-button { display: inline-block; padding: 1.2rem 3rem; background: var(--primary); color: white; text-decoration: none; border-radius: 50px; font-weight: 400; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 10px 30px rgba(139, 115, 85, 0.2); font-size: 1.1rem; letter-spacing: 0.02em; }
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 400;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(139, 115, 85, 0.2);
+            font-size: 1.1rem;
+            letter-spacing: 0.02em;
+        }
         .cta-button:hover { transform: translateY(-2px); box-shadow: 0 15px 40px rgba(139, 115, 85, 0.3); background: var(--primary-light); }
         .cta-secondary { background: transparent; color: var(--primary); border: 1px solid var(--primary); box-shadow: none; }
         .cta-secondary:hover { background: var(--primary); color: white; }
@@ -47,8 +134,23 @@
         /* Sections */
         .section { padding: 100px 20px; position: relative; }
         .container { max-width: 1200px; margin: 0 auto; }
-        .section-title { font-family: 'Rubik', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; color: var(--primary); text-align: center; margin-bottom: 4rem; letter-spacing: 0.03em; position: relative; }
-        .section-title::after { content: ''; display: block; width: 60px; height: 1px; background: var(--accent); margin: 1.5rem auto 0; }
+
+        .section-title {
+            font-family: 'Rubik', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 300;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 4rem;
+            letter-spacing: 0.03em;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px; height: 1px; background: var(--accent);
+            margin: 1.5rem auto 0;
+        }
 
         /* Journey Section */
         .journey-section { background: linear-gradient(180deg, var(--cream) 0%, var(--light) 100%); padding: 120px 20px; }
@@ -91,14 +193,26 @@
         .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--primary-light); opacity: 0.3; transition: opacity 0.3s ease; cursor: pointer; }
         .dot.active { opacity: 1; }
 
-        /* Workshop Image Section */
+        /* Workshop Image Section (square frame for your square photo) */
         .workshop-image-section { padding: 50px 20px 100px; background: white; display: flex; justify-content: center; }
         .workshop-image-container { max-width: 700px; width: 100%; text-align: center; }
-        .workshop-image-placeholder { width: 100%; height: 400px; background: linear-gradient(135deg, #F5F0E8 0%, #FAF7F2 50%, #F5F0E8 100%); border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto; position: relative; overflow: hidden; box-shadow: 0 5px 20px rgba(44, 36, 22, 0.1); }
-        .placeholder-content { text-align: center; z-index: 1; }
-        .om-symbol { font-size: 3rem; opacity: 0.3; display: inline-block; animation: pulseSymbol 4s ease-in-out infinite; }
-        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.3; } 50% { transform: scale(1.1); opacity: 0.4; } }
-        .workshop-image-placeholder img { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; position: absolute; top: 0; left: 0; z-index: 2; }
+
+        .workshop-image-placeholder {
+            width: 100%;
+            aspect-ratio: 1 / 1;          /* square frame */
+            background: linear-gradient(135deg, #F5F0E8 0%, #FAF7F2 50%, #F5F0E8 100%);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            margin: 0 auto;
+            box-shadow: 0 5px 20px rgba(44, 36, 22, 0.1);
+        }
+        .workshop-image-placeholder img {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;            /* fills square nicely */
+            border-radius: 20px;
+        }
         .workshop-image-caption { margin-top: 1.5rem; color: var(--muted); font-style: italic; font-size: 1.1rem; }
 
         /* Workshop Details */
@@ -155,15 +269,10 @@
             .journey-step { flex-direction: column; text-align: center; }
             .method-features { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
             .method-feature { padding: 1.5rem 0.5rem; }
-            .workshop-image-placeholder { height: 300px; }
             .registration-buttons { flex-direction: column; }
             .cta-button { width: 100%; }
         }
-
-        @media (max-width: 480px) {
-            .method-features { grid-template-columns: 1fr; }
-            .workshop-image-placeholder { height: 250px; }
-        }
+        @media (max-width: 480px) { .method-features { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -210,7 +319,7 @@
                     </div>
                 </div>
                 <div class="journey-arrow">↓</div>
-                <div class="journey-step" style="--index: 3">
+                <div class="journey-step" style="--index: 3)">
                     <div class="journey-icon" style="background: linear-gradient(135deg, #A08C74, #8B7355);">🌀</div>
                     <div class="journey-content">
                         <h3 style="color: #8B7355;">תחילת השחרור</h3>
@@ -275,6 +384,7 @@
     <section class="testimonials-section">
         <div class="container">
             <h2 class="section-title">קולות מהמסע</h2>
+
             <div class="testimonials-container">
                 <div class="testimonial active">
                     <p class="testimonial-text">"זה הטיפול המשמעותי ביותר שחוויתי. הובלת אותי בתוך תהליך משנה חיים"</p>
@@ -288,6 +398,7 @@
                     <p class="testimonial-text">"צפו בי דברים שלא זכרתי. הפעם הצלחתי להיות נוכח בלי לפחד. צחקתי, בכיתי, שחררתי"</p>
                     <div class="testimonial-author">- דן צ׳</div>
                 </div>
+
                 <div class="testimonial-dots">
                     <span class="dot active" data-index="0"></span>
                     <span class="dot" data-index="1"></span>
@@ -297,17 +408,13 @@
         </div>
     </section>
 
-    <!-- Workshop Image Section -->
+    <!-- Workshop Image Section (square photo) -->
     <section class="workshop-image-section">
         <div class="container">
             <div class="workshop-image-container">
                 <div class="workshop-image-placeholder">
-                    <!-- התמונה שולבה כאן -->
-                    <img src="IMG_6972.jpeg" alt="אווירה מסדנה קודמת">
-                    <div class="placeholder-content">
-                        <span class="om-symbol">🕉️</span>
-                        <p style="color: #9B8B7A; margin-top: 1rem; opacity: 0.5;">מרחב קדוש של שחרור וריפוי</p>
-                    </div>
+                    <!-- Put the image file next to this HTML and keep the same name -->
+                    <img src="IMG_6972.jpeg" alt="אווירה מהסדנאות" loading="lazy">
                 </div>
                 <p class="workshop-image-caption">אווירה מסדנאות קודמות</p>
             </div>
@@ -335,7 +442,7 @@
             <h2 class="section-title">על המנחה</h2>
             <div class="about-content">
                 <div class="about-image">
-                    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHI... (ה־base64 המקורי שלך) ..." alt="דור סויסה">
+                    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAA..." alt="דור סויסה">
                 </div>
                 <div class="about-text">
                     <h3>דור סויסה</h3>
@@ -423,7 +530,7 @@
             showTestimonial(currentTestimonial);
         }
         setInterval(nextTestimonial, 5000);
-        dots.forEach((dot, index) => { dot.addEventListener('click', () => { currentTestimonial = index; showTestimonial(index); }); });
+        dots.forEach((dot, index) => dot.addEventListener('click', () => { currentTestimonial = index; showTestimonial(index); }));
 
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -434,21 +541,32 @@
             });
         });
 
-        // Parallax
+        // Subtle parallax
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
             const hero = document.querySelector('.hero');
-            if (hero && scrolled < window.innerHeight) hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            if (hero && scrolled < window.innerHeight) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
         });
 
-        // Fade-in sections
-        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        // Fade-in animations
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => { if (entry.isIntersecting) { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; } });
-        }, observerOptions);
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
         document.querySelectorAll('.section').forEach(section => {
-            section.style.opacity = '0'; section.style.transform = 'translateY(20px)'; section.style.transition = 'opacity 0.6s ease, transform 0.6s ease'; observer.observe(section);
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
         });
     </script>
 </body>
 </html>
+```
