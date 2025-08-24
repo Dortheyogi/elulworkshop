@@ -105,12 +105,16 @@
             background: white;
             border-radius: 100px;
             box-shadow: 0 10px 40px var(--shadow);
-            margin-bottom: 3rem;
+            margin-bottom: 1.5rem;
             font-size: 1.1rem;
             color: var(--dark);
         }
 
         .hero-date span { display: flex; align-items: center; gap: 0.5rem; }
+
+        .hero-cta{display:flex;flex-direction:column;align-items:center;gap:1rem;margin-top:1rem}
+        .hero-price{font-size:1.2rem;color:var(--primary)}
+        .hero-actions{display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center}
 
         /* CTA Button */
         .cta-button {
@@ -125,6 +129,8 @@
             box-shadow: 0 10px 30px rgba(139, 115, 85, 0.2);
             font-size: 1.1rem;
             letter-spacing: 0.02em;
+            border: none;
+            cursor: pointer;
         }
         .cta-button:hover { transform: translateY(-2px); box-shadow: 0 15px 40px rgba(139, 115, 85, 0.3); background: var(--primary-light); }
         .cta-secondary { background: transparent; color: var(--primary); border: 1px solid var(--primary); box-shadow: none; }
@@ -198,7 +204,7 @@
 
         .workshop-image-placeholder {
             width: 100%;
-            aspect-ratio: 1 / 1;          /* square frame */
+            aspect-ratio: 1 / 1;
             background: linear-gradient(135deg, #F5F0E8 0%, #FAF7F2 50%, #F5F0E8 100%);
             border-radius: 20px;
             position: relative;
@@ -209,7 +215,7 @@
         .workshop-image-placeholder img {
             position: absolute; inset: 0;
             width: 100%; height: 100%;
-            object-fit: cover;            /* fills square nicely */
+            object-fit: cover;
             border-radius: 20px;
         }
         .workshop-image-caption { margin-top: 1.5rem; color: var(--muted); font-style: italic; font-size: 1.1rem; }
@@ -260,6 +266,11 @@
         .footer { background: var(--dark); color: var(--light); padding: 3rem 20px; text-align: center; }
         .footer p { opacity: 0.7; font-weight: 300; }
 
+        /* Sticky bar (mobile default, desktop on 50% scroll) */
+        .sticky-bar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #eee;display:none;justify-content:space-between;align-items:center;padding:.75rem 1rem;box-shadow:0 -8px 30px var(--shadow);z-index:50}
+        @media(max-width:768px){.sticky-bar{display:flex}}
+        .sticky-bar .cta-button{padding:.6rem 1.2rem;border-radius:999px;font-size:0.9rem}
+
         /* Responsive */
         @media (max-width: 768px) {
             .hero-date { flex-direction: column; gap: 1rem; padding: 1.5rem 2rem; }
@@ -270,6 +281,7 @@
             .method-feature { padding: 1.5rem 0.5rem; }
             .registration-buttons { flex-direction: column; }
             .cta-button { width: 100%; }
+            .sticky-bar .cta-button { padding: 0.5rem 0.8rem; }
         }
         @media (max-width: 480px) { .method-features { grid-template-columns: 1fr; } }
     </style>
@@ -279,18 +291,38 @@
     <section class="hero">
         <div class="hero-content">
             <h1>סליחה ונשימה</h1>
-            <p class="hero-subtitle">מסע לשחרור הנשמה דרך נשימה מעגלית סופית</p>
+            <p class="hero-subtitle">מסע לשחרור הנשמה דרך נשימה מעגלית סוּפית</p>
             <div class="hero-date">
                 <span>📅 6.9.25</span>
                 <span>🕐 18:30-21:30</span>
                 <span>📍 תל אביב</span>
             </div>
-            <a href="#registration" class="cta-button">הצטרפ/י למסע</a>
+
+            <!-- Countdown Timer -->
+            <div id="countdown-timer" style="background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; padding: 1rem 2rem; border-radius: 15px; margin: 1rem 0; font-size: 1.1rem; box-shadow: 0 10px 30px rgba(139, 115, 85, 0.3);">
+                <div style="margin-bottom: 0.5rem; font-size: 0.9rem; opacity: 0.9;">זמן עד תחילת הסדנה:</div>
+                <div id="countdown-display" style="font-size: 1.3rem; font-weight: 500; letter-spacing: 0.05em;">
+                    <span id="days">0</span> ימים, <span id="hours">0</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
+                </div>
+            </div>
+
+            <!-- Hero CTA block (price + spots + buttons) -->
+            <div class="hero-cta">
+              <div class="hero-price">₪<span id="price">299</span> · <span id="spots">עד 15 משתתפים</span></div>
+              <div class="hero-actions">
+                <a id="pay-now-hero" href="https://links.payboxapp.com/BMD5W2FXLVb" target="_blank" class="cta-button">להרשמה מיידית</a>
+                <a id="whatsapp-hero" href="https://wa.me/972542391144" target="_blank" class="cta-button cta-secondary">שאלה בווטסאפ</a>
+              </div>
+            </div>
+
+            <div style="margin-top:1.25rem">
+              <a href="#registration" class="cta-button cta-secondary">הצטרפ/י למסע</a>
+            </div>
         </div>
     </section>
 
     <!-- Journey Section -->
-    <section class="journey-section">
+    <section class="journey-section section">
         <div class="container">
             <h2 class="section-title">המסע מחיים תקועים ללב פתוח</h2>
             <div class="journey-container">
@@ -318,7 +350,7 @@
                     </div>
                 </div>
                 <div class="journey-arrow">↓</div>
-                <div class="journey-step" style="--index: 3)">
+                <div class="journey-step" style="--index: 3">
                     <div class="journey-icon" style="background: linear-gradient(135deg, #A08C74, #8B7355);">🌀</div>
                     <div class="journey-content">
                         <h3 style="color: #8B7355;">תחילת השחרור</h3>
@@ -342,11 +374,15 @@
                     </div>
                 </div>
             </div>
+
+            <div style="text-align:center;margin-top:1.5rem">
+              <a href="#registration" class="cta-button">להרשמה עכשיו</a>
+            </div>
         </div>
     </section>
 
     <!-- Pain Points Section -->
-    <section class="pain-section">
+    <section class="pain-section section">
         <div class="container">
             <h2 class="section-title">האם את/ה מזהה את עצמך?</h2>
             <div class="pain-grid">
@@ -357,16 +393,20 @@
                 <div class="pain-card"><div class="pain-icon">😤</div><h3>כעס פנימי</h3><p>זעם שלא עוזב, גם כשאת/ה יודע/ת שהוא לא משרת</p></div>
                 <div class="pain-card"><div class="pain-icon">🌫️</div><h3>ערפל נפשי</h3><p>חוסר בהירות ותכלית</p></div>
             </div>
+
+            <div style="text-align:center;margin-top:1.5rem">
+              <a href="#registration" class="cta-button">להרשמה עכשיו</a>
+            </div>
         </div>
     </section>
 
     <!-- Method Section -->
-    <section class="method-section">
+    <section class="method-section section">
         <div class="container">
-            <h2 class="section-title">השיטה הסופית העתיקה</h2>
+            <h2 class="section-title">השיטה הסוּפית העתיקה</h2>
             <div class="method-content">
                 <p class="method-intro">
-                    נשימה מעגלית ייחודית מהמסורת הסופית, המשלבת נשימה, קול ותנועה רפטטיבית.<br>
+                    נשימה מעגלית ייחודית מהמסורת הסוּפית, המשלבת נשימה, קול ותנועה רפטטיבית.<br>
                     טכניקה עתיקה שעוברת מדור לדור, מאפשרת שחרור עמוק של טראומות ופתיחת הלב לאהבה.
                 </p>
                 <div class="method-features">
@@ -376,11 +416,15 @@
                     <div class="method-feature"><div class="method-feature-icon">🥁</div><h4>תיפוף שמאני</h4></div>
                 </div>
             </div>
+
+            <div style="text-align:center;margin-top:1.5rem">
+              <a href="#registration" class="cta-button">להרשמה עכשיו</a>
+            </div>
         </div>
     </section>
 
     <!-- Testimonials Section -->
-    <section class="testimonials-section">
+    <section class="testimonials-section section">
         <div class="container">
             <h2 class="section-title">קולות מהמסע</h2>
 
@@ -404,57 +448,71 @@
                     <span class="dot" data-index="2"></span>
                 </div>
             </div>
+
+            <div style="text-align:center;margin-top:1.5rem">
+              <a href="#registration" class="cta-button">להרשמה עכשיו</a>
+            </div>
         </div>
     </section>
 
     <!-- Workshop Image Section (square photo) -->
-    <section class="workshop-image-section">
+    <section class="workshop-image-section section">
         <div class="container">
             <div class="workshop-image-container">
                 <div class="workshop-image-placeholder">
-                    <!-- Put the image file next to this HTML and keep the same name -->
                     <img src="IMG_6972.jpeg" alt="אווירה מהסדנאות" loading="lazy">
                 </div>
                 <p class="workshop-image-caption">אווירה מסדנאות קודמות</p>
+            </div>
+
+            <div style="text-align:center;margin-top:1.5rem">
+              <a href="#registration" class="cta-button">להרשמה עכשיו</a>
             </div>
         </div>
     </section>
 
     <!-- Workshop Details Section -->
-    <section class="workshop-section">
+    <section class="workshop-section section">
         <div class="container">
             <h2 class="section-title">מה קורה בסדנה?</h2>
             <div class="workshop-grid">
-                <div class="workshop-card"><div class="workshop-card-icon">🤝</div><h3>היכרות והכנה</h3><p>יצירת מרחב בטוח ומוגן, הסבר על התהליך והכוונה מדויקת</p></div>
-                <div class="workshop-card"><div class="workshop-card-icon">🌪️</div><h3>נשימה מעגלית</h3><p>תרגול ייחודי המשלב נשימה, קול ותנועה עם תיפוף שמאני</p></div>
-                <div class="workshop-card"><div class="workshop-card-icon">🎭</div><h3>שחרור רגשי</h3><p>הוצאה טבעית של רגשות כלואים וטראומות</p></div>
-                <div class="workshop-card"><div class="workshop-card-icon">🧘‍♀️</div><h3>מנוחה והטמעה</h3><p>איזון עדין של המערכת והטמעה עמוקה</p></div>
-                <div class="workshop-card"><div class="workshop-card-icon">💬</div><h3>מעגל שיתוף</h3><p>סיכום קבוצתי במרחב תומך ומכיל</p></div>
+                <div class="workshop-card"><div class="workshop-card-icon">🤝</div><h3>היכרות והכנה</h3><p>15 דק – מרחב בטוח, הנחיות, כוונה</p></div>
+                <div class="workshop-card"><div class="workshop-card-icon">🌪️</div><h3>נשימה מעגלית</h3><p>70 דק – נשימה, קול ותנועה עם תיפוף שמאני</p></div>
+                <div class="workshop-card"><div class="workshop-card-icon">🎭</div><h3>שחרור רגשי</h3><p>20 דק – הוצאה טבעית של רגשות כלואים</p></div>
+                <div class="workshop-card"><div class="workshop-card-icon">🧘‍♀️</div><h3>מנוחה והטמעה</h3><p>15 דק – איזון עדין והטמעה עמוקה</p></div>
+                <div class="workshop-card"><div class="workshop-card-icon">💬</div><h3>מעגל שיתוף</h3><p>20 דק – סיכום קבוצתי במרחב מכיל</p></div>
                 <div class="workshop-card"><div class="workshop-card-icon">✨</div><h3>תוצאות מיידיות</h3><p>שחרור, קלילות ותחושת התחדשות</p></div>
+            </div>
+
+            <div style="text-align:center;margin-top:1.5rem">
+              <a href="#registration" class="cta-button">להרשמה עכשיו</a>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section class="about-section">
+    <section class="about-section section">
         <div class="container">
             <h2 class="section-title">על המנחה</h2>
             <div class="about-content">
                 <div class="about-image">
-                <img src="IMG_7200.jpeg" alt="דור סויסה">
+                  <img src="IMG_7200.jpeg" alt="דור סויסה">
                 </div>
                 <div class="about-text">
                     <h3>דור סויסה</h3>
-                    <p>המסע שלי התחיל ממקום של כאב עמוק. הייתי מכור לסמים, חוויתי דיכאון כרוני, ומערכות היחסים שלי היו רעילות.</p>
-                    <p>לפני כמה שנים הגעתי לתחתית, עברתי טרנספורמציה עמוקה, ונסעתי לאשראם בשוודיה שם נחשפתי לטכניקה הסופית העתיקה הזו.</p>
-                    <p>אחרי שלושה ימים של תרגול, שחררתי דברים שלא ידעתי שקיימים בי. ידעתי שאני חייב להביא את זה הביתה.</p>
+                    <p>המסע שלי התחיל ממקום של כאב עמוק. הייתי מכור לסמים, חוויתי דיכאון כרוני, ומערכות יחסים רעילות.</p>
+                    <p>עברתי טרנספורמציה עמוקה, ונסעתי לאשראם בשוודיה שם נחשפתי לטכניקה הסוּפית העתיקה הזו.</p>
+                    <p>אחרי שלושה ימים של תרגול, שחררתי דברים שלא ידעתי שקיימים בי. מאז אני מביא את זה הביתה.</p>
+                    <div style="margin-top:1rem">
+                      <a href="#registration" class="cta-button cta-secondary">שמור/י מקום</a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Details Section -->
-    <section class="details-section">
+    <section class="details-section section">
         <div class="container">
             <h2 class="section-title">פרטים חשובים</h2>
             <div class="details-grid">
@@ -475,22 +533,28 @@
                     <p>• ארוחות קלות ביום הסדנה<br>• צום 3-4 שעות לפני<br>• ללא אלכוהול 24 שעות מראש</p>
                 </div>
             </div>
+
+            <div style="text-align:center;margin-top:1.5rem">
+              <a href="#registration" class="cta-button">להרשמה עכשיו</a>
+            </div>
         </div>
     </section>
 
     <!-- Registration Section -->
-    <section class="registration-section" id="registration">
+    <section class="registration-section section" id="registration">
         <div class="container">
             <h2 class="section-title">הצטרפות למסע</h2>
             <div class="registration-content">
-                <div class="price-display">₪299</div>
-                <div class="spots-remaining">נותרו 12 מקומות מתוך 15</div>
+                <div class="price-display">₪<span id="priceDisplay">299</span></div>
+                <div class="spots-remaining"><span id="spotsBottom">עד 15 משתתפים</span></div>
                 <div class="registration-buttons">
-                    <a href="https://links.payboxapp.com/BMD5W2FXLVb" target="_blank" class="cta-button">תשלום דרך פייבוקס</a>
+                    <a id="pay-now-main" href="https://links.payboxapp.com/BMD5W2FXLVb" target="_blank" class="cta-button">תשלום דרך פייבוקס</a>
+                    <a id="pay-bit-main" href="https://www.bitpay.co.il/app/me/4E2C0A36-34AB-7C46-4191-957DBBF5E22FF55E" target="_blank" class="cta-button">תשלום דרך ביט</a>
                     <a href="#contact" class="cta-button cta-secondary">יצירת קשר</a>
                 </div>
+                <div style="margin-top:12px;color:var(--muted)">החזר מלא עד 72 שעות לפני הסדנה</div>
                 <div class="notes-box">
-                    <h4> חשוב לדעת</h4>
+                    <h4>חשוב לדעת</h4>
                     <ul>
                         <li>✓ מתאים למתחילים ומתקדמים</li>
                         <li>✓ לא נדרש ניסיון קודם</li>
@@ -501,7 +565,7 @@
                 </div>
                 <div class="contact-info" id="contact">
                     <h4>שאלות? דור כאן בשבילך</h4>
-                    <p>📱 וואטסאפ: <a href="https://wa.me/972542391144">054-239-1144</a><br>💰 החזר מלא עד 72 שעות לפני הסדנה</p>
+                    <p>📱 וואטסאפ: <a id="whatsapp-bottom" href="https://wa.me/972542391144" target="_blank" rel="noopener">054-239-1144</a><br>💰 החזר מלא עד 72 שעות לפני הסדנה</p>
                 </div>
             </div>
         </div>
@@ -511,6 +575,28 @@
     <footer class="footer">
         <p>© 2025 דור סויסה - כל הזכויות שמורות</p>
     </footer>
+
+    <!-- Sticky bar -->
+    <div class="sticky-bar" id="stickyBar">
+      <span>₪<span id="stickyPrice">299</span> · שישי 6.9 · תל אביב</span>
+      <div style="display:flex;gap:0.5rem">
+        <a id="pay-now-sticky" href="https://links.payboxapp.com/BMD5W2FXLVb" target="_blank" class="cta-button">פייבוקס</a>
+        <a id="pay-bit-sticky" href="https://www.bitpay.co.il/app/me/4E2C0A36-34AB-7C46-4191-957DBBF5E22FF55E" target="_blank" class="cta-button">ביט</a>
+      </div>
+    </div>
+
+    <!-- Discount Modal -->
+    <div id="discountModal" aria-hidden="true" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.35);z-index:60">
+      <div role="dialog" aria-label="הטבה זמנית" style="background:#fff;border-radius:16px;max-width:520px;width:92%;padding:24px;box-shadow:0 20px 60px var(--shadow);text-align:center">
+        <h3 style="color:var(--primary);margin-bottom:8px">🎉 הטבת 50 ₪ ל־10 הדקות הבאות!</h3>
+        <p style="color:var(--muted);margin-bottom:16px">רוצה לשמור מקום עכשיו בתשלום דרך ביט?</p>
+        <div style="font-size:1.2rem;margin-bottom:16px">מחיר: ₪<span id="discountPrice">249</span> · <span id="countdown">10:00</span></div>
+        <div style="display:flex;gap:.5rem;justify-content:center">
+          <a id="redeemDiscount" class="cta-button" href="#" target="_blank">תשלום בביט ₪249</a>
+          <button id="closeDiscount" class="cta-button cta-secondary" type="button">לא עכשיו</button>
+        </div>
+      </div>
+    </div>
 
     <script>
         // Testimonials Carousel
@@ -534,9 +620,10 @@
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
-                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                if (!target) return;
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
 
@@ -565,7 +652,211 @@
             section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(section);
         });
+
+        // ===== Conversion helpers & discount logic =====
+        const CONFIG = {
+          priceFull: 299,
+          priceDiscount: 249,
+          seatsTextTop: 'עד 15 משתתפים',
+          seatsTextBottom: 'עד 15 משתתפים',
+          payLinkFull: 'https://links.payboxapp.com/BMD5W2FXLVb',
+          payLinkDiscount: 'https://www.bitpay.co.il/app/me/4E2C0A36-34AB-7C46-4191-957DBBF5E22FF55E',
+          whatsapp: 'https://wa.me/972542391144'
+        };
+
+        function withUTM(url){
+          try{
+            const qs = location.search.replace(/^\?/,'');
+            if(!qs) return url;
+            const u = new URL(url);
+            const current = new URLSearchParams(u.search);
+            const incoming = new URLSearchParams(qs);
+            incoming.forEach((v,k)=>{ if(!current.has(k)) current.set(k,v); });
+            u.search = current.toString();
+            return u.toString();
+          }catch(e){ return url; }
+        }
+
+        function setPriceDisplay(amount){
+          const ids=['price','stickyPrice','priceDisplay'];
+          ids.forEach(id=>{ const el=document.getElementById(id); if(el) el.textContent=amount; });
+        }
+        function setPayLinks(url){
+          ['pay-now-hero','pay-now-sticky','pay-now-main'].forEach(id=>{
+            const el=document.getElementById(id);
+            if(el) el.href = withUTM(url);
+          });
+        }
+        function setBitLinks(){
+          ['pay-bit-main','pay-bit-sticky'].forEach(id=>{
+            const el=document.getElementById(id);
+            if(el) el.href = withUTM('https://www.bitpay.co.il/app/me/4E2C0A36-34AB-7C46-4191-957DBBF5E22FF55E');
+          });
+        }
+        function setWhatsAppLinks(){
+          ['whatsapp-hero','whatsapp-bottom'].forEach(id=>{
+            const el=document.getElementById(id);
+            if(el) el.href = withUTM(CONFIG.whatsapp);
+          });
+        }
+        function track(ev, data={}){ window.dataLayer = window.dataLayer||[]; window.dataLayer.push({event:ev,...data}); }
+
+        // Init defaults
+        setPriceDisplay(CONFIG.priceFull);
+        setPayLinks(CONFIG.payLinkFull);
+        setBitLinks();
+        setWhatsAppLinks();
+        const spotsTop = document.getElementById('spots');
+        if (spotsTop) spotsTop.textContent = CONFIG.seatsTextTop;
+        const spotsBottom = document.getElementById('spotsBottom');
+        if (spotsBottom) spotsBottom.textContent = CONFIG.seatsTextBottom;
+
+        // Discount modal logic
+        const modal = document.getElementById('discountModal');
+        const closeBtn = document.getElementById('closeDiscount');
+        const redeemBtn = document.getElementById('redeemDiscount');
+        const countdownEl = document.getElementById('countdown');
+        const STORAGE_KEYS = { expire:'discount_expire_at', snooze:'discount_snooze_until', redeemed:'discount_redeemed' };
+
+        function now(){ return Date.now(); }
+        function minutes(ms){ return Math.floor(ms/60000).toString().padStart(2,'0'); }
+        function seconds(ms){ return Math.floor((ms%60000)/1000).toString().padStart(2,'0'); }
+
+        function showModal(){
+          if(!modal) return;
+          modal.style.display='flex';
+          modal.setAttribute('aria-hidden','false');
+          track('discount_open');
+        }
+        function hideModal(){
+          modal.style.display='none';
+          modal.setAttribute('aria-hidden','true');
+        }
+
+        function startDiscountWindow(){
+          const expireAt = Date.now() + 10*60*1000; // 10 minutes
+          localStorage.setItem(STORAGE_KEYS.expire, String(expireAt));
+          applyDiscountState();
+          startCountdown(expireAt);
+        }
+
+        function applyDiscountState(){
+          const expireAt = parseInt(localStorage.getItem(STORAGE_KEYS.expire)||'0',10);
+          if(expireAt && expireAt>now()){
+            setPriceDisplay(CONFIG.priceDiscount);
+            setPayLinks(CONFIG.payLinkDiscount);
+            const dp = document.getElementById('discountPrice');
+            if(dp) dp.textContent = CONFIG.priceDiscount;
+          }else{
+            setPriceDisplay(CONFIG.priceFull);
+            setPayLinks(CONFIG.payLinkFull);
+            localStorage.removeItem(STORAGE_KEYS.expire);
+          }
+        }
+
+        let timerId=null;
+        function startCountdown(expireAt){
+          function tick(){
+            const left = expireAt - now();
+            if(left<=0){
+              applyDiscountState();
+              hideModal();
+              if(timerId) clearInterval(timerId);
+              return;
+            }
+            if(countdownEl) countdownEl.textContent = `${minutes(left)}:${seconds(left)}`;
+          }
+          if(timerId) clearInterval(timerId);
+          tick();
+          timerId = setInterval(tick, 1000);
+        }
+
+        function canShowModal(){
+          const snooze = parseInt(localStorage.getItem(STORAGE_KEYS.snooze)||'0',10);
+          const redeemed = localStorage.getItem(STORAGE_KEYS.redeemed)==='1';
+          if(redeemed) return false;
+          if(snooze && snooze>now()) return false;
+          return true;
+        }
+
+        // show after 90s, or on exit-intent
+        setTimeout(()=>{ if(canShowModal() && !localStorage.getItem(STORAGE_KEYS.expire)) showModal(); }, 90000);
+        window.addEventListener('mouseout', e=>{
+          if(e.clientY<=0 && canShowModal() && !localStorage.getItem(STORAGE_KEYS.expire)) showModal();
+        });
+
+        closeBtn?.addEventListener('click', ()=>{
+          hideModal();
+          localStorage.setItem(STORAGE_KEYS.snooze, String(now()+24*60*60*1000));
+        });
+        redeemBtn?.addEventListener('click', (e)=>{
+          e.preventDefault();
+          startDiscountWindow();
+          localStorage.setItem(STORAGE_KEYS.redeemed,'1');
+          hideModal();
+          track('discount_redeem');
+          window.open(withUTM(CONFIG.payLinkDiscount),'_blank');
+        });
+
+        // persist discount state
+        applyDiscountState();
+        (function(){
+          const exp = parseInt(localStorage.getItem(STORAGE_KEYS.expire)||'0',10);
+          if(exp>now()){ startCountdown(exp); }
+        })();
+
+        // Set Bit link for discount button
+        if(redeemBtn) redeemBtn.href = CONFIG.payLinkDiscount;
+
+        // CTA tracking
+        document.querySelectorAll('a.cta-button').forEach(a=>{
+          a.addEventListener('click', ()=> track('cta_click',{id:a.id||a.textContent}));
+        });
+
+        // Reveal sticky on 50% scroll in desktop
+        window.addEventListener('scroll', ()=>{
+          const sb = document.getElementById('stickyBar');
+          if(!sb) return;
+          const scrolled = window.scrollY/(document.body.scrollHeight-window.innerHeight);
+          if(window.innerWidth>768){ sb.style.display = scrolled>0.5 ? 'flex' : 'none'; }
+        });
+
+        // Workshop Countdown Timer
+        function initWorkshopCountdown(){
+          const workshopDate = new Date(2025, 8, 6, 18, 30, 0); // September 6, 2025 18:30 (month is 0-indexed)
+          const countdownEl = document.getElementById('countdown-display');
+          const timerContainer = document.getElementById('countdown-timer');
+          
+          function updateCountdown(){
+            const now = new Date().getTime();
+            const distance = workshopDate.getTime() - now;
+            
+            if(distance < 0){
+              if(timerContainer) timerContainer.style.display = 'none';
+              return;
+            }
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            const daysEl = document.getElementById('days');
+            const hoursEl = document.getElementById('hours');
+            const minutesEl = document.getElementById('minutes');
+            const secondsEl = document.getElementById('seconds');
+            
+            if(daysEl) daysEl.textContent = days;
+            if(hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
+            if(minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
+            if(secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
+          }
+          
+          updateCountdown();
+          setInterval(updateCountdown, 1000);
+        }
+        
+        initWorkshopCountdown();
     </script>
 </body>
 </html>
-```
